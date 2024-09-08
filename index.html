@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Investimentos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <div class="card shadow p-4">
+            <h1 class="mb-4 text-center text-primary">Calculadora de Investimentos</h1>
+            <div class="mb-3">
+                <label for="investmentAmount" class="form-label">Valor total disponível para investimentos (R$)</label>
+                <input type="number" v-model="investmentAmount" class="form-control form-control-lg" id="investmentAmount" placeholder="Insira o valor">
+            </div>
+            <button @click="calculateInvestments" class="btn btn-primary btn-lg w-100 mb-4">Calcular</button>
+            <div v-if="showReport" class="report card bg-light p-4">
+                <h2 class="text-center mb-4">Relatório de Investimentos - {{ currentDate }}</h2>
+                <div class="report-section mb-3">
+                    <h3>Fundos Imobiliários de Tijolo (70%): R$ {{ tijoloAmount }}</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Logístico: R$ {{ results.logistic }}</li>
+                        <li class="list-group-item">Lajes Corporativas: R$ {{ results.corporate }}</li>
+                        <li class="list-group-item">Shoppings: R$ {{ results.shopping }}</li>
+                        <li class="list-group-item">Híbridos: R$ {{ results.hybrid }}</li>
+                        <li class="list-group-item">Renda Urbana: R$ {{ results.urban }}</li>
+                    </ul>
+                </div>
+                <div class="report-section">
+                    <h3>Fundos de Papel (30%): R$ {{ papelAmount }}</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">CRI: R$ {{ results.cri }}</li>
+                        <li class="list-group-item">FOF: R$ {{ results.fof }}</li>
+                        <li class="list-group-item">Fiagro: R$ {{ results.fiagro }}</li>
+                    </ul>
+                </div>
+                <button @click="downloadPDF" class="btn btn-success btn-lg w-100 mt-4">Baixar Relatório</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
